@@ -96,11 +96,11 @@ var parseJSON = function(json) {
       if (getChar() === '\\') {
         escapeChar();
         if (getChar() === '\\') {
-          str+= getChar();
+          str += getChar();
           nextChar();
         }
         if (getChar() === '"') {
-          str+= getChar();
+          str += getChar();
           nextChar();
         }
         continue;
@@ -127,7 +127,7 @@ var parseJSON = function(json) {
 
 
   // helper func for null
-   var nully = function() {
+  var nully = function() {
     do {
       nextChar();
     } while (getChar() !== 'l');
@@ -143,7 +143,7 @@ var parseJSON = function(json) {
     //be called when the parser encounters 0-9 or -
     do {
       numStr += getChar();
-      nextChar()
+      nextChar();
     } while ('0123456790-.'.includes(getChar()));
     return parseFloat(numStr);
   };
