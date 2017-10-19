@@ -11,9 +11,9 @@ var parseJSON = function(json) {
   var nextChar = function() {
     if (json[index + 1]) {
       index ++;
+    } else if (getChar() !== "}" && getChar() !== "]") {
+      throw new SyntaxError;
     }
-    // index ++;
-    // return getChar();
   };
   //helper function to deal with both types of escape characters
   var escapeChar = function() {
@@ -55,32 +55,12 @@ var parseJSON = function(json) {
     // at the time func starts is '['
     nextChar();
     // check to see if getChar() === ']'
-    if (getChar() === ']') {
-      // if it is, move to next char
-      // return arr
-      // before we call nextChar(), getChar() === ']'
-      nextChar();
-      // after we call nextChar(), getChar() is whatever after
-    } else {
-      // while getChar() !== ']'
-      // if thing we encounter is not comma
-      // call parser()
-      // if thing we encounter is a comma
-      // skip over that comma
-      // call parser()
-      // push results of parser() into arr
+    if (getChar() !== ']') {
       while (getChar() !== ']') {
         scrub();
         if (getChar() !== ']') {
           arr.push(parser());
         }
-        // arr.push(parser());
-        // if (getChar() !== ',') {
-        //   arr.push(parser());
-        // } else {
-        //   nextChar();
-        //   arr.push(parser())
-        // }
       }
     }
     nextChar();
@@ -100,6 +80,9 @@ var parseJSON = function(json) {
           nextChar();
         }
         if (getChar() === '"') {
+          if (json[index + 1] === "]" || json[index + 1] === "}") {
+            throw new SyntaxError;
+          }
           str += getChar();
           nextChar();
         }

@@ -122,7 +122,7 @@ parseableStrings = [
     '      }\r\n'
 ];
 
-// JSON does not allow you to parse these strings
+//JSON does not allow you to parse these strings
 unparseableStrings = [
   '["foo", "bar"',
   '["foo", "bar\\"]'
